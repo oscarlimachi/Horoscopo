@@ -1,20 +1,23 @@
 package com.example.horoscopo
 
+
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Adapter
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.horoscopo.data.Horoscope
 
-class HoroscopeAdapter(val items: List<Horoscope>, val onItemClick: (Int) -> Unit): Adapter<HoroscopeViewHolder>() {
+class HoroscopeAdapter(val items: List<Horoscope>): RecyclerView.Adapter<HoroscopeViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HoroscopeViewHolder {
-        TODO("Not yet implemented")
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_horoscope,parent,false)
+        return HoroscopeViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: HoroscopeViewHolder, position: Int
-    ) {
-        TODO("Not yet implemented")
+    override fun onBindViewHolder(holder: HoroscopeViewHolder, position: Int) {
+        val horoscope=items[position]
+        holder.render(horoscope)
     }
 
     override fun getItemCount(): Int {
@@ -22,7 +25,15 @@ class HoroscopeAdapter(val items: List<Horoscope>, val onItemClick: (Int) -> Uni
     }
 }
 
+class HoroscopeViewHolder(view: View): RecyclerView.ViewHolder(view){
 
-class HoroscopeViewHolder(view: View) : ViewHolder(view){
+    val nameTextView: TextView =view.findViewById(R.id.nameTextView)
+    val dateTextView: TextView =view.findViewById(R.id.dateTextView)
+    val iconImageView: ImageView =view.findViewById(R.id.iconImageView)
 
+    fun render(horoscope: Horoscope){
+        nameTextView.setText(horoscope.name)
+        dateTextView.setText(horoscope.dates)
+        iconImageView.setImageResource(horoscope.icon)
+    }
 }
