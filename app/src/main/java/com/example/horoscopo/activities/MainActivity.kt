@@ -1,6 +1,7 @@
 package com.example.horoscopo.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -101,7 +102,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         recyclerView=findViewById(R.id.recyclerview)
-        val adapter= HoroscopeAdapter(horoscopeList)
+        val adapter= HoroscopeAdapter(horoscopeList,{
+            Log.i("CLICK","se ha dado click")
+        })
         recyclerView.adapter=adapter
         recyclerView.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
 
